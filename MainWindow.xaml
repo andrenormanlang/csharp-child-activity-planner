@@ -1,0 +1,280 @@
+﻿<Window x:Class="YoungChildActivityPlanner.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Young Child Activity Planner" 
+        Height="800" 
+        Width="1200" 
+        MaxWidth="1000" 
+        Background="#F9F9F9">
+    <Window.Resources>
+        <!-- [Existing Styles and Resources] -->
+    </Window.Resources>
+
+    <DockPanel>
+        <!-- Top Menu -->
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_New" Click="MenuFileNew_Click" ToolTip="Start a new schedule."/>
+                <MenuItem Header="_Open File" Click="MenuFileOpen_Click" ToolTip="Open an existing schedule from a file."/>
+                <MenuItem Header="_Save" Click="MenuFileSave_Click" ToolTip="Quick save the current schedule."/>
+                <MenuItem Header="Save _As" Click="MenuFileSaveAs_Click" ToolTip="Save the current schedule to a new file."/>
+                <Separator/>
+                <MenuItem Header="Exit" Click="MenuFileExit_Click" ToolTip="Close the application."/>
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem Header="_About" Click="MenuHelpAbout_Click" ToolTip="View information about this application."/>
+            </MenuItem>
+        </Menu>
+
+        <!-- Status Bar -->
+        <StatusBar DockPanel.Dock="Bottom" Background="#E0E0E0">
+            <StatusBarItem Height="30">
+                <TextBlock Name="CurrentTimeTextBlock" Foreground="DarkBlue" FontWeight="Bold" FontSize="14" ToolTip="Displays the current date and time."/>
+            </StatusBarItem>
+        </StatusBar>
+
+        <!-- ScrollViewer for vertical responsiveness -->
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <Grid Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Row 0: Child Management -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Row 1: Schedule Activity -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Row 2: View Activities -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Row 3: Action Buttons -->
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Row 0: Child Management -->
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <GroupBox Header="Add Child" Grid.Column="0" Padding="10" ToolTip="Add a new child to the system." Margin="10">
+                        <StackPanel>
+                            <Grid Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="Name:" Grid.Column="0" ToolTip="Enter the child's name."/>
+                                <TextBox x:Name="ChildNameTextBox" Grid.Column="1" ToolTip="Enter the full name of the child." Margin="0,0,84,0"/>
+                            </Grid>
+                            <Grid Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="Date of Birth:" Grid.Column="0" ToolTip="Select the child's date of birth."/>
+                                <DatePicker x:Name="ChildDOBPicker" Grid.Column="1" ToolTip="Only children 3-6 years old are accepted." Margin="0,0,84,0"/>
+                            </Grid>
+                            <Button x:Name="AddChildButton"
+                Content="Add Child"
+                Width="126"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Click="AddChild_Click"
+                ToolTip="Click to add the child." />
+                        </StackPanel>
+                    </GroupBox>
+
+                    <!-- Manage Childs -->
+                    <GroupBox Header="Manage Childs" Grid.Column="1" Padding="10" ToolTip="Edit or delete existing children." Margin="10">
+                        <StackPanel>
+                            <Grid Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="Select Child:" Grid.Column="0" ToolTip="Choose a child to manage."/>
+                                <ComboBox x:Name="ManageChildComboBox" Grid.Column="1" ToolTip="Select an existing child from the list." Margin="0,0,99,0"/>
+                            </Grid>
+                            <Grid Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="New Name:" Grid.Column="0" ToolTip="Update the name of the selected child."/>
+                                <TextBox x:Name="EditChildNameTextBox" Grid.Column="1" ToolTip="Enter the new name for the child." Margin="0,0,99,0"/>
+                            </Grid>
+                            <Grid Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="New DOB:" Grid.Column="0" ToolTip="Update the date of birth for the selected child."/>
+                                <DatePicker x:Name="EditChildDOBPicker" Grid.Column="1" ToolTip="Select the new date of birth." Margin="0,0,99,0"/>
+                            </Grid>
+                            <Grid HorizontalAlignment="Center">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Button x:Name="EditChildButton"
+                                Content="Edit Child"
+                                Width="120"
+                                Margin="10"
+                                HorizontalAlignment="Center"
+                                Click="EditChild_Click"
+                                ToolTip="Save changes to the child's details." 
+                                   />
+                                <Button x:Name="DeleteChildButton"
+                                Content="Delete Child"
+                                Width="120"
+                                Margin="10"
+                                Background="#D32F2F"
+                                HorizontalAlignment="Center"
+                                Grid.Column="1"
+                                Click="DeleteChild_Click"
+                                ToolTip="Delete the selected child and all associated activities." 
+                                /> 
+                            </Grid>
+                        </StackPanel>
+                    </GroupBox>
+                </Grid>
+
+                <!-- Row 1: Schedule Activity -->
+                <GroupBox Header="Schedule Activity" Grid.Row="1" Padding="10" ToolTip="Plan activities for childs." Margin="10">
+                    <StackPanel>
+                        <Grid Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Select Child:" Grid.Column="0" ToolTip="Select a child to schedule an activity for."/>
+                            <ComboBox x:Name="ChildComboBox" Grid.Column="1" ToolTip="Choose a child from the list." Margin="0,0,584,0"/>
+                        </Grid>
+                        <Grid Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Title:" Grid.Column="0" ToolTip="Enter the title of the activity."/>
+                            <TextBox x:Name="ActivityTitleTextBox" Grid.Column="1" ToolTip="Provide a brief title for the activity." Margin="0,0,579,0"/>
+                        </Grid>
+                        <Grid Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Description:" Grid.Column="0" ToolTip="Enter a description of the activity."/>
+                            <TextBox x:Name="ActivityDescriptionTextBox" Grid.Column="1" ToolTip="Describe the activity in detail."/>
+                        </Grid>
+                        <Grid Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Date:" Grid.Column="0" ToolTip="Choose the date of the activity."/>
+                            <DatePicker x:Name="ActivityDatePicker" Grid.Column="1" ToolTip="Pick the date for the activity." Margin="0,0,749,0"/>
+                        </Grid>
+
+                        <!-- Time Selection for Scheduling -->
+                        <Grid Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="30"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Time:" Grid.Column="0" ToolTip="Select the time for the activity."/>
+                            <ComboBox x:Name="ActivityHourComboBox" Grid.Column="1" Width="50" ToolTip="Select hour (0-23)"/>
+                            <Label Content="hr" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            
+                            <ComboBox x:Name="ActivityMinuteComboBox" Grid.Column="3" Width="50" ToolTip="Select minutes (0-59)"/>
+                            <Label Content="min" Grid.Column="4" VerticalAlignment="Center" ToolTip="Hour:Minute format." Margin="0,0,-49,0"/>
+                        </Grid>
+
+                        <!-- New Duration Selection -->
+                        <Grid Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="30"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Duration:" Grid.Column="0" ToolTip="Select the duration of the activity."/>
+                            <ComboBox x:Name="ActivityDurationHourComboBox" Grid.Column="1" Width="50" ToolTip="Select hours (0-23)"/>
+                            <Label Content="hrs" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <ComboBox x:Name="ActivityDurationMinuteComboBox" Grid.Column="3" Width="50" ToolTip="Select minutes (0-59)"/>
+                            <Label Content="min" Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Center" ToolTip="Hours and minutes for duration."/>
+                        </Grid>
+
+
+                        <Grid Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Type:" Grid.Column="0" ToolTip="Specify the type of activity (e.g., Educational, Physical)."/>
+                            <ComboBox x:Name="ActivityTypeComboBox" Grid.Column="1" ToolTip="Select the activity type." Margin="0,0,579,0"/>
+                        </Grid>
+                        <Button x:Name="ScheduleActivityButton" Content="Schedule Activity" HorizontalAlignment="Left" Margin="16" Width="150" Click="ScheduleActivity_Click"
+                                ToolTip="Click to add the activity for the selected child."/>
+                    </StackPanel>
+                </GroupBox>
+
+                <!-- Row 2: View Activities -->
+                <GroupBox Header="View Activities" Grid.Row="2" Padding="10" ToolTip="View activities scheduled for a child." Margin="10">
+                    <StackPanel>
+                        <Grid Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Select Child:" Grid.Column="0" ToolTip="Choose a child to see their activities."/>
+                            <ComboBox x:Name="ViewChildComboBox" Grid.Column="1" SelectionChanged="ViewChildComboBox_SelectionChanged"
+                                      ToolTip="Select a child to view their scheduled activities." Margin="0,0,562,0"/>
+                        </Grid>
+                        <DataGrid x:Name="ActivitiesDataGrid" AutoGenerateColumns="False" CanUserAddRows="False"
+              CanUserDeleteRows="False" IsReadOnly="False" Margin="5" ToolTip="Displays the list of scheduled activities."
+              SelectionChanged="ActivitiesDataGrid_SelectionChanged"
+              CellEditEnding="ActivitiesDataGrid_CellEditEnding">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Date and Time" Binding="{Binding ScheduledDate, StringFormat={}{0:G}}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Title" Binding="{Binding Title}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Description" Binding="{Binding Description}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Type" Binding="{Binding Type}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Duration" Binding="{Binding Duration, StringFormat={}{0:hh\\:mm}}" IsReadOnly="True"/>
+                                <!-- New Duration Column -->
+                                <DataGridCheckBoxColumn Header="Completed" Binding="{Binding IsCompleted, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </GroupBox>
+
+
+                <!-- Row 3: Action Buttons -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="3" Margin="13,5,0,9">
+                    <Button x:Name="NewButton" Content="New" Width="100" Click="NewButton_Click" ToolTip="Start a new schedule."/>
+                    <Button x:Name="UpdateActivityButton" Content="Update Activity" Width="150" Click="UpdateActivity_Click"
+            ToolTip="Update the selected activity." Margin="10,0,0,0" IsEnabled="False"/>
+                    <Button x:Name="DeleteActivityButton" Content="Delete Activity" Width="150" Click="DeleteActivity_Click" Background="#D32F2F"
+            ToolTip="Delete the selected activity from the list." Margin="10,0,0,0" IsEnabled="False"/>
+                    <Button x:Name="PrintButton" Content="Print Activities" Width="150" Click="PrintButton_Click"
+            ToolTip="Print the list of activities for the selected child." Margin="10,0,0,0"/>
+                    <!-- New Development Report Button -->
+                    <!--<Button x:Name="DevelopmentMilestonesReportButton" Content="Development Milestones Report" Width="180" Click="DevelopmentMilestonesReportButton_Click"
+            ToolTip="Generate a development milestones report for the selected child." Margin="10,0,0,0"/>-->
+                    <Button x:Name="ProgressDashboardButton" Content="Progress Dashboard" Width="180" Click="ProgressDashboard_Click"
+ToolTip="Generate a development milestones report for the selected child." Margin="10,0,0,0"/>
+
+
+
+                    <!-- Cancel Update Button -->
+                    <Button x:Name="CancelUpdateButton" Content="Cancel Update" Width="120" Click="CancelUpdate_Click"
+            ToolTip="Cancel updating the selected activity." Margin="10,0,0,0" Visibility="Collapsed"/>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+    </DockPanel>
+</Window>

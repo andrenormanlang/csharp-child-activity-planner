@@ -1,0 +1,56 @@
+﻿<Window x:Class="YoungChildActivityPlanner.AboutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="About Young Child Activity Planner"
+        Height="650" Width="600"
+        ResizeMode="NoResize" WindowStartupLocation="CenterOwner"
+        Background="#f0f4f8">
+    <Grid Margin="15">
+        <Border CornerRadius="10" Background="White" BorderBrush="#cccccc" BorderThickness="1">
+            <StackPanel VerticalAlignment="Stretch" Margin="15">
+                <!-- Header Section -->
+                <TextBlock Text="Young Child Activity Planner" FontSize="22" FontWeight="Bold" Foreground="#2C3E50" TextAlignment="Center" Margin="0,0,0,10" />
+                <TextBlock Text="Version 1.0.0" FontSize="14" Foreground="#34495E" TextAlignment="Center" Margin="0,0,0,5" />
+                <TextBlock Text="Developed by André Norman Lang" FontSize="14" Foreground="#34495E" TextAlignment="Center" Margin="0,0,0,15" />
+
+                <!-- About Section -->
+                <TextBlock Text="What does this app do?" FontSize="16" FontWeight="Bold" Foreground="#2C3E50" Margin="0,0,0,5" />
+                <TextBlock TextWrapping="Wrap" FontSize="14" Foreground="#7F8C8D" Margin="0,5,0,15">
+                    This application is designed to help parents and caregivers plan, schedule, and track
+                    activities for children aged 3 to 6. It ensures a balanced approach to physical,
+                    educational, creative, social, and recreational development.
+                </TextBlock>
+
+                <!-- Instructions Section -->
+                <TextBlock Text="How to Use the App:" FontSize="16" FontWeight="Bold" Foreground="#2C3E50" Margin="0,0,0,5" />
+                <StackPanel Margin="0,5,0,15">
+                    <TextBlock TextWrapping="Wrap" FontSize="14" Foreground="#7F8C8D" Margin="0,2">
+                        1. <Bold>Add a child:</Bold> Start by adding your child's name and date of birth to personalize activity tracking.
+                    </TextBlock>
+                    <TextBlock TextWrapping="Wrap" FontSize="14" Foreground="#7F8C8D" Margin="0,2">
+                        2. <Bold>Schedule Activities:</Bold> Use the "Schedule Activity" feature to plan daily, weekly, or monthly activities.
+                    </TextBlock>
+                    <TextBlock TextWrapping="Wrap" FontSize="14" Foreground="#7F8C8D" Margin="0,2">
+                        3. <Bold>Track Progress:</Bold> View charts and reports to see completed, pending, and upcoming activities.
+                    </TextBlock>
+                    <TextBlock TextWrapping="Wrap" FontSize="14" Foreground="#7F8C8D" Margin="0,2">
+                        4. <Bold>Get Suggestions:</Bold> Get tailored activity recommendations to balance your child's developmental needs.
+                    </TextBlock>
+                    <TextBlock TextWrapping="Wrap" FontSize="14" Foreground="#7F8C8D" Margin="0,2">
+                        5. <Bold>Print Reports:</Bold> Generate and print activity schedules or progress reports for reference.
+                    </TextBlock>
+                </StackPanel>
+
+                <!-- Support Section -->
+                <TextBlock Text="Need Help?" FontSize="16" FontWeight="Bold" Foreground="#2C3E50" Margin="0,0,0,5" />
+                <TextBlock TextWrapping="Wrap" FontSize="14" Foreground="#7F8C8D" Margin="0,5,0,20">
+                    For detailed documentation or assistance, please contact support at:
+                    <Hyperlink NavigateUri="mailto:support@childactivityplanner.com">andrenormanlang@gmail.com</Hyperlink>
+                </TextBlock>
+
+                <!-- OK Button -->
+                <Button Content="OK" Width="100" Height="35" HorizontalAlignment="Center" Foreground="White" Background="#3498DB" BorderThickness="0" FontWeight="Bold" Click="OkButton_Click" />
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
