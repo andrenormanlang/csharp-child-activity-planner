@@ -1,6 +1,6 @@
-# 🌟 Young Child Activity Planner 🧸
+# 🌟 C# Child Activity Planner 🧸
 
-The **Young Child Activity Planner** is an intuitive application designed to help parents or guardians plan, schedule, and manage activities for children aged 3 to 6 years. With features for tracking progress, scheduling, and generating reports, this tool is perfect for organized caregiving. 🎉
+The **C# Child Activity Planner** is an intuitive application designed to help parents or guardians plan, schedule, and manage activities for children aged 3 to 6 years. With features for tracking progress, scheduling, and generating reports, this tool is perfect for organized caregiving. 🎉
 
 ---
 
